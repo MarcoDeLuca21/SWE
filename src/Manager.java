@@ -9,7 +9,6 @@ public class Manager {
     private List<Employee> employees;
     private Warehouse warehouse;
     private static Manager instance;
-
     private List<Observer> observerList = new ArrayList<>();
 
     private Manager(String name,String surname,int id,Warehouse warehouse){
