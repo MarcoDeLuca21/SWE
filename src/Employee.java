@@ -97,7 +97,7 @@ public class Employee implements Observer{
             if(expiredDate != null){
                 long difference = expiredDate.getTime() - today.getTime();
                 if(difference <= millisOneDay){
-                    String message = "Il prodotto "+product.getName()+" scade domani, rimuovere dal magazzino!";
+                    String message = "Il dipendente "+name+" dice che il prodotto "+product.getName()+" scade domani, rimuovere dal magazzino!";
                     manager.notifyAll(message);
                 }
             }
