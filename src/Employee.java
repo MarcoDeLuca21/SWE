@@ -56,26 +56,26 @@ public class Employee implements Observer{
         System.out.println("Dipendente: " + name +" id: "+ id + " ha ricevuto l'aggiornamento dal manager: " + message);
     }
 
+    public  void addProduct(Product product){//riguarda
+        warehouse.addProduct(product);
+    }
+
+    public void removeProduct(Product product){//riguarda
+        warehouse.removeProducts(product);
+    }
+
     public void modifyPrice(Product product, double newPrice){ //riguarda
         product.setPrice(newPrice);
 
         String message = "Il Dipendente "+ name +" ha modificato il prezzo del prodotto: "+ product.getName() + " a "+newPrice;
-        manager.notifyAll(message);
+        manager.notify(this,message);
     }
 
     public void modifyQuantity(Product product,int newQuantity){ //riguarda
         product.setQuantity(newQuantity);
 
         String message = "Il Dipendente "+ name +" ha modificato la quantità del prodotto: "+ product.getName() + " a "+newQuantity;
-        manager.notifyAll(message);
-    }
-
-    public  void addProdotto(Product product){//riguarda
-        warehouse.addProduct(product);
-    }
-
-    public void  removeProdotto(Product product){//riguarda
-        warehouse.removeProducts(product);
+        manager.notify(this,message);
     }
 
     public void notifyProductOutOfStock(){//riguarda perchè a volte non notifica
@@ -83,7 +83,7 @@ public class Employee implements Observer{
         for (Product product:productList) {
             if (product.getQuantity() == 0) {
                 String message = "Il dipendente " + name + " ha notificato che il prodotto " + product.getName() + " è esaurito";
-                manager.notifyAll(message);
+                manager.notify(this,message);
             }
         }
     }
@@ -98,7 +98,7 @@ public class Employee implements Observer{
                 long difference = expiredDate.getTime() - today.getTime();
                 if(difference <= millisOneDay){
                     String message = "Il dipendente "+name+" dice che il prodotto "+product.getName()+" scade domani, rimuovere dal magazzino!";
-                    manager.notifyAll(message);
+                    manager.notify(this,message);
                 }
             }
         }

@@ -9,7 +9,6 @@ public class Manager {
     private List<Employee> employees;
     private Warehouse warehouse;
     private static Manager instance;
-    private List<Observer> observerList = new ArrayList<>();
 
     private Manager(String name,String surname,int id,Warehouse warehouse){
         this.name = name;
@@ -74,20 +73,14 @@ public class Manager {
         }
     }
 
-    public void addObservable(Observer observer){//riguarda
-        observerList.add(observer);
-    }
-
-    public void removeObservable(Observer observer){//riguarda
-        observerList.remove(observer);
-    }
-
     //riguarda metodo
-    public void notifyAll(String message){//riguarda
+    public void notify(Employee employee, String message){//riguarda
         System.out.println("Il manager "+name+" sta notificando il messaggio: "+message+".");
-        for (Observer observer:observerList){
-            System.out.println();
-            observer.update(message);
+        for (Employee e:employees){
+            if(e != employee){
+                System.out.println();
+                e.update(message);
+            }
         }
     }
 

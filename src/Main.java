@@ -18,18 +18,17 @@ public class Main {
         Manager manager = Manager.getInstance("Mario","Rossi",4,warehouse);
         Employee employee1 = new Employee("marco","de luca",1, manager,warehouse);
         Employee employee2 = new Employee("roberto","frocio",3,manager,warehouse);
-
-        manager.addObservable(employee1);
-        manager.addObservable(employee2);
+        Employee employee3 = new Employee("leonardo","verdi", 8, manager,warehouse);
 
         manager.addEmployee(employee1);
         manager.addEmployee(employee2);
+        manager.addEmployee(employee3);
 
-        manager.notifyAll("Forse funziona");
+        manager.notify(employee1,"Forse funziona");
 
         warehouse.addProduct(prodotto1);
         warehouse.addProduct(prodotto2);
-        employee1.addProdotto(prodotto2);
+        employee1.addProduct(prodotto2);
 
         warehouse.viewProducts();
 
@@ -49,10 +48,10 @@ public class Main {
 
         manager.viewAllProducts();
 
-        employee1.addProdotto(prodotto1);
+        employee1.addProduct(prodotto1);
         employee1.modifyQuantity(prodotto1,26);
-        employee2.addProdotto(prodotto1);
-        employee2.addProdotto(prodotto2);
+        employee2.addProduct(prodotto1);
+        employee2.addProduct(prodotto2);
         employee1.modifyQuantity(prodotto1,1);
 
         warehouse.viewProducts();
@@ -104,7 +103,7 @@ public class Main {
         Date datascadenza = new Date(oggi.getTime()+(24 * 60 * 60 * 1000));
         Date secondadata = new Date(oggi.getTime()-(24 * 60 * 60 * 1000));
         prodotto2.setExpiryDate(datascadenza);
-        employee2.removeProdotto(prodotto2);
+        employee2.removeProduct(prodotto2);
         prodotto1.setExpiryDate(secondadata);
         employee1.notifyExpiredProduct(prodotto1.getClass().getSimpleName());
         employee1.notifyExpiredProduct(prodotto2.getClass().getSimpleName());
