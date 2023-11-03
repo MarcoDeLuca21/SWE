@@ -78,6 +78,14 @@ public class Employee implements Observer{
         manager.notify(this,message);
     }
 
+    public void viewAllProducts(){//riguarda
+        warehouse.viewProducts();
+    }
+
+    public void viewProductsByType(String type){//riguarda
+        warehouse.viewProductsByType(type);
+    }
+
     public void notifyProductOutOfStock(){//riguarda perchè a volte non notifica
         List<Product> productList = warehouse.getProducts();
         for (Product product:productList) {

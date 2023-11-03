@@ -75,12 +75,20 @@ public class Manager {
 
     //riguarda metodo
     public void notify(Employee employee, String message){//riguarda
-        System.out.println("Il manager "+name+" sta notificando il messaggio: "+message+".");
+        System.out.println("Il manager "+name+" ha ricevuto il messaggio: "+message+".");
         for (Employee e:employees){
             if(e != employee){
                 System.out.println();
                 e.update(message);
             }
+        }
+    }
+
+    public void notifyAllEmployee(String message){//riguarda
+        System.out.println("Il manager "+name+" notifica il seguente messaggio a tutti i dipendenti: "+message);
+        for (Employee e:employees){
+            System.out.println();
+            e.update(message);
         }
     }
 
