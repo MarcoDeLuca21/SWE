@@ -16,7 +16,7 @@ public class Employee implements Observer{
         this.name = name;
         this.surname = surname;
         this.id = id;
-        this.manager = manager;
+        this.manager = manager; //è necessario che ogni istanza di Employee sia associata a un Manager specifico, allora ha senso includere il Manager come parte del costruttore.Questo potrebbe essere utile se ogni dipendente ha un manager diretto a cui riferire, e questa associazione è fissa.
         this.warehouse = warehouse;
         this.weekSchedule = new WorkingWeek();
     }

@@ -24,7 +24,7 @@ public class Main {
         manager.addEmployee(employee2);
         manager.addEmployee(employee3);
 
-        manager.notify(employee1,"Forse funziona");
+        manager.notifyAllEmployee("Forse funziona");
 
         warehouse.addProduct(prodotto1);
         warehouse.addProduct(prodotto2);
