@@ -53,7 +53,9 @@ class ManagerTest {
 
         manager.notify(employee1,message);
 
-        verify(employee1).update(message);
+        Mockito.verify(employee2).update(message);
+
+        Mockito.(employee1, Mockito.never().update(Mockito.anyString());
     }*/
 
     @Test
