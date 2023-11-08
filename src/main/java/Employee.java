@@ -64,6 +64,10 @@ public class Employee implements Observer{
         warehouse.removeProducts(product);
     }
 
+    public List<Product> getListProducts(){
+        return warehouse.getProducts();
+    }
+
     public void modifyPrice(Product product, double newPrice){ //riguarda
         product.setPrice(newPrice);
 
