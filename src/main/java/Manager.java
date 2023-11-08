@@ -92,6 +92,18 @@ public class Manager {
         }
     }
 
+    public  void addProduct(Product product){//riguarda
+        warehouse.addProduct(product);
+    }
+
+    public void removeProduct(Product product){//riguarda
+        warehouse.removeProducts(product);
+    }
+
+    public List<Product> getListProducts(){
+        return warehouse.getProducts();
+    }
+
     public void viewAllProducts(){//riguarda
         warehouse.viewProducts();
     }

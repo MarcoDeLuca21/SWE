@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +11,8 @@ class ManagerTest {
     private Manager manager;
     private Employee employee1;
     private Employee employee2;
+    private Product product1;
+    private Product product2;
 
     @BeforeEach
     public void setUp(){
@@ -17,6 +20,10 @@ class ManagerTest {
         manager = Manager.getInstance("Mario","Rossi",1,warehouse);
         employee1 = new Employee("Roberto","Verdi",2,manager,warehouse);
         employee2 = new Employee("Leonardo", "Bianchi",3,manager,warehouse);
+        Date date = new Date(System.currentTimeMillis());
+        FactoryProduct factory = new FactoryProduct();
+        product1 = factory.createFrozenProduct("ITALPIZZA",5.99,5, date);
+        product2 = factory.createVeggyProduct("TOFU",2.49,10,date);
     }
 
     @Test
@@ -42,6 +49,31 @@ class ManagerTest {
         manager.removeEmployee(employee2);
         assertFalse(manager.getEmployees().contains(employee2));
         assertEquals(size-2,manager.getEmployees().size());
+        assertTrue(manager.getEmployees().isEmpty());
+    }
+
+    @Test
+    public void testAddProduct(){
+        int initialSize = manager.getListProducts().size();
+        assertTrue(manager.getListProducts().isEmpty());
+        manager.addProduct(product1);
+        assertEquals(initialSize+1,manager.getListProducts().size());
+        manager.addProduct(product2);
+        assertEquals(initialSize+2,manager.getListProducts().size());
+    }
+
+    @Test
+    public void testRemoveProduct(){
+        manager.addProduct(product1);
+        manager.addProduct(product2);
+        int size = manager.getListProducts().size();
+        manager.removeProduct(product1);
+        assertFalse(manager.getListProducts().contains(product1));
+        assertEquals(size-1,manager.getListProducts().size());
+        manager.removeProduct(product2);
+        assertFalse(manager.getListProducts().contains(product2));
+        assertEquals(size-2,manager.getListProducts().size());
+        assertTrue(manager.getListProducts().isEmpty());
     }
 
     /*@Test
