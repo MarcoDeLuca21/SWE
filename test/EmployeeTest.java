@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +12,7 @@ class EmployeeTest {
    private Employee employee;
    private Product product1;
    private Product product2;
+   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
    @BeforeEach
     public void setUp(){
@@ -62,7 +65,27 @@ class EmployeeTest {
 
    @Test
     public void testNotifyProductOutOfStock(){
+      employee.addProduct(product1);
+      employee.addProduct(product2);
+      product1.setQuantity(0);
 
+      employee.notifyProductOutOfStock();
+      System.setOut(new PrintStream(outContent));
+      employee.notifyProductOutOfStock();
+      String output = outContent.toString();
+
+      // Verifica che l'output contiene il messaggio corretto
+      assertTrue(output.contains("Il dipendente Roberto ha notificato che il prodotto ITALPIZZA è esaurito."));
+
+      product1.setQuantity(1);
+      outContent.reset();
+
+      // Invoca nuovamente il metodo
+      employee.notifyProductOutOfStock();
+      output = outContent.toString();
+
+      // Verifica che il messaggio non è più presente nell'output
+      assertFalse(output.contains("Il dipendente Roberto ha notificato che il prodotto ITALPIZZA è esaurito."));
    }
 
    @Test
