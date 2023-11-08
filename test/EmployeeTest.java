@@ -75,7 +75,7 @@ class EmployeeTest {
       String output = outContent.toString();
 
       // Verifica che l'output contiene il messaggio corretto
-      assertTrue(output.contains("Il dipendente Roberto ha notificato che il prodotto ITALPIZZA è esaurito."));
+      assertTrue(output.contains("Il dipendente "+employee.getName()+" ha notificato che il prodotto "+product1.getName() +" è esaurito"));
 
       product1.setQuantity(1);
       outContent.reset();
@@ -85,7 +85,7 @@ class EmployeeTest {
       output = outContent.toString();
 
       // Verifica che il messaggio non è più presente nell'output
-      assertFalse(output.contains("Il dipendente Roberto ha notificato che il prodotto ITALPIZZA è esaurito."));
+      assertFalse(output.contains("Il dipendente "+employee.getName()+" ha notificato che il prodotto "+product1.getName()+" è esaurito"));
    }
 
    @Test
