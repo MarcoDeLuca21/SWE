@@ -12,6 +12,7 @@ class EmployeeTest {
    private Employee employee;
    private Product product1;
    private Product product2;
+   private Product product3;
    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
    @BeforeEach
@@ -23,6 +24,7 @@ class EmployeeTest {
        FactoryProduct factory = new FactoryProduct();
        product1 = factory.createFrozenProduct("ITALPIZZA",5.99,5, date);
        product2 = factory.createVeggyProduct("TOFU",2.49,10,date);
+       product3 = factory.createVeggyProduct("SEITAN", 3.70,4,date);
    }
 
    @Test
@@ -31,14 +33,20 @@ class EmployeeTest {
        assertTrue(employee.getListProducts().isEmpty());
        employee.addProduct(product1);
        assertEquals(initialSize+1,employee.getListProducts().size());
+       assertTrue(employee.getListProducts().contains(product1));
        employee.addProduct(product2);
        assertEquals(initialSize+2,employee.getListProducts().size());
+       assertTrue(employee.getListProducts().contains(product2));
+       employee.addProduct(product3);
+       assertEquals(initialSize+3,employee.getListProducts().size());
+       assertTrue(employee.getListProducts().contains(product3));
    }
 
    @Test
     public void testRemoveProduct(){
        employee.addProduct(product1);
        employee.addProduct(product2);
+       employee.addProduct(product3);
        int size = employee.getListProducts().size();
        employee.removeProduct(product1);
        assertFalse(employee.getListProducts().contains(product1));
@@ -46,6 +54,9 @@ class EmployeeTest {
        employee.removeProduct(product2);
        assertFalse(employee.getListProducts().contains(product2));
        assertEquals(size-2,employee.getListProducts().size());
+       employee.removeProduct(product3);
+       assertFalse(employee.getListProducts().contains(product3));
+       assertEquals(size-3,employee.getListProducts().size());
        assertTrue(employee.getListProducts().isEmpty());
    }
 
