@@ -111,7 +111,8 @@ class ManagerTest {
         manager.notify(mockedEmployee1,message);
 
         verify(mockedEmployee2).update(message);
-        verify(mockedEmployee1, never()).update(message); //verifico che il metodo di aggiornamento non venga chiamato da mockedEmployee1
+        //verifico che il metodo di aggiornamento non venga chiamato da mockedEmployee1
+        verify(mockedEmployee1, never()).update(message);
 
         //rimuovo dipendenti per non avere conflitto con testAddEmployee
         manager.removeEmployee(mockedEmployee1);
