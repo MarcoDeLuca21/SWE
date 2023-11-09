@@ -1,11 +1,13 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
 class ManagerTest {
     private Manager manager;
@@ -76,19 +78,22 @@ class ManagerTest {
         assertTrue(manager.getListProducts().isEmpty());
     }
 
-    /*@Test
-    public void testNotify(){
-        manager.addEmployee(employee1);
-        manager.addEmployee(employee2);
+    @Test
+    public void testNotifyAllEmployee(){
+        Employee mockedEmployee1 = Mockito.spy(employee1);
+        Employee mockedEmployee2 = Mockito.spy(employee2);
+
+        manager.addEmployee(mockedEmployee1);
+        manager.addEmployee(mockedEmployee2);
 
         String message = "Messaggio di test";
+        manager.notifyAllEmployee(message);
 
-        manager.notify(employee1,message);
+        // Verifica che il metodo di aggiornamento venga chiamato dai dipendenti
+        verify(mockedEmployee1).update(message);
+        verify(mockedEmployee2).update(message);
 
-        Mockito.verify(employee2).update(message);
-
-        Mockito.(employee1, Mockito.never().update(Mockito.anyString());
-    }*/
+    }
 
     @Test
     public void testSetWeekSchedule(){
