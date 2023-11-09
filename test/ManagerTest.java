@@ -92,7 +92,6 @@ class ManagerTest {
         // Verifica che il metodo di aggiornamento venga chiamato dai dipendenti
         verify(mockedEmployee1).update(message);
         verify(mockedEmployee2).update(message);
-
     }
 
     @Test
