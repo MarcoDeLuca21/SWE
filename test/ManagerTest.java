@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 class ManagerTest {
@@ -92,6 +93,29 @@ class ManagerTest {
         // Verifica che il metodo di aggiornamento venga chiamato dai dipendenti
         verify(mockedEmployee1).update(message);
         verify(mockedEmployee2).update(message);
+
+        //rimuovo dipendenti per non avere conflitto con testAddEmployee
+        manager.removeEmployee(mockedEmployee1);
+        manager.removeEmployee(mockedEmployee2);
+    }
+
+    @Test
+    public void testNotify(){
+        Employee mockedEmployee1 = Mockito.spy(employee1);
+        Employee mockedEmployee2 = Mockito.spy(employee2);
+
+        manager.addEmployee(mockedEmployee1);
+        manager.addEmployee(mockedEmployee2);
+
+        String message = "Messaggio di test";
+        manager.notify(mockedEmployee1,message);
+
+        verify(mockedEmployee2).update(message);
+        verify(mockedEmployee1, never()).update(message); //verifico che il metodo di aggiornamento non venga chiamato da mockedEmployee1
+
+        //rimuovo dipendenti per non avere conflitto con testAddEmployee
+        manager.removeEmployee(mockedEmployee1);
+        manager.removeEmployee(mockedEmployee2);
     }
 
     @Test
