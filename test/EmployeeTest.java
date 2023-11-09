@@ -67,9 +67,8 @@ class EmployeeTest {
     public void testNotifyProductOutOfStock(){
       employee.addProduct(product1);
       employee.addProduct(product2);
-      product1.setQuantity(0);
+      product1.setQuantity(0); //set quantità prodotto a 0 (prodotto esaurito)
 
-      employee.notifyProductOutOfStock();
       System.setOut(new PrintStream(outContent));
       employee.notifyProductOutOfStock();
       String output = outContent.toString();
@@ -77,7 +76,7 @@ class EmployeeTest {
       // Verifica che l'output contiene il messaggio corretto
       assertTrue(output.contains("Il dipendente "+employee.getName()+" ha notificato che il prodotto "+product1.getName() +" è esaurito"));
 
-      product1.setQuantity(1);
+      product1.setQuantity(1); //set quantità prodotto a 1
       outContent.reset();
 
       // Invoca nuovamente il metodo
@@ -90,6 +89,24 @@ class EmployeeTest {
 
    @Test
     public void testNotifyExpiredProduct(){
+       employee.addProduct(product1);
+       employee.addProduct(product2);
+       Date tomorrow = new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+       product2.setExpiryDate(tomorrow); //set data di scadenza del product 2 a domani
 
+       System.setOut(new PrintStream(outContent));
+       employee.notifyExpiredProduct(product2.getClass().getSimpleName());
+       String output = outContent.toString();
+
+       assertTrue(output.contains("Il dipendente "+employee.getName()+" dice che il prodotto "+product2.getName()+" scade domani, rimuovere dal magazzino!"));
+
+       Date nextWeek = new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000);
+       product2.setExpiryDate(nextWeek); //set data di scadenza del product 2 a settimana prossima
+       outContent.reset();
+
+       employee.notifyExpiredProduct(product2.getClass().getSimpleName());
+       output = outContent.toString();
+
+       assertFalse(output.contains("Il dipendente "+employee.getName()+" dice che il prodotto "+product2.getName()+" scade domani, rimuovere dal magazzino!"));
    }
 }
