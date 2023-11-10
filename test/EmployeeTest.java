@@ -109,6 +109,7 @@ class EmployeeTest {
        employee.notifyExpiredProduct(product2.getClass().getSimpleName());
        String output = outContent.toString();
 
+       // Verifica che l'output contiene il messaggio corretto
        assertTrue(output.contains("Il dipendente "+employee.getName()+" dice che il prodotto "+product2.getName()+" scade domani, rimuovere dal magazzino!"));
 
        Date nextWeek = new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000);
@@ -118,6 +119,7 @@ class EmployeeTest {
        employee.notifyExpiredProduct(product2.getClass().getSimpleName());
        output = outContent.toString();
 
+       // Verifica che il messaggio non è più presente nell'output
        assertFalse(output.contains("Il dipendente "+employee.getName()+" dice che il prodotto "+product2.getName()+" scade domani, rimuovere dal magazzino!"));
    }
 }
