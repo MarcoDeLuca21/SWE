@@ -12,6 +12,8 @@ import static org.mockito.Mockito.verify;
 
 class ManagerTest {
     private Manager manager;
+    private Manager manager2;
+    private Warehouse warehouse;
     private Employee employee1;
     private Employee employee2;
     private Product product1;
@@ -27,6 +29,12 @@ class ManagerTest {
         FactoryProduct factory = new FactoryProduct();
         product1 = factory.createFrozenProduct("ITALPIZZA",5.99,5, date);
         product2 = factory.createVeggyProduct("TOFU",2.49,10,date);
+    }
+
+    @Test
+    public void testSingleton(){
+        manager2 = Manager.getInstance("Francesco","Ferrari",99,warehouse);
+        assertSame(manager,manager2);
     }
 
     @Test
