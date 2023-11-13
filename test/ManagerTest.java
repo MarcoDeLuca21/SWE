@@ -33,9 +33,11 @@ class ManagerTest {
     public void testAddEmployee(){
         int initialSize = manager.getEmployees().size();
         assertTrue(manager.getEmployees().isEmpty());
+
         manager.addEmployee(employee1);
         assertTrue(manager.getEmployees().contains(employee1));
         assertEquals(initialSize+1,manager.getEmployees().size());
+
         manager.addEmployee(employee2);
         assertTrue(manager.getEmployees().contains(employee2));
         assertEquals(initialSize+2,manager.getEmployees().size());
@@ -45,10 +47,13 @@ class ManagerTest {
     public void testRemoveEmployee(){
         manager.addEmployee(employee1);
         manager.addEmployee(employee2);
+
         int size = manager.getEmployees().size();
+
         manager.removeEmployee(employee1);
         assertFalse(manager.getEmployees().contains(employee1));
         assertEquals(size-1,manager.getEmployees().size());
+
         manager.removeEmployee(employee2);
         assertFalse(manager.getEmployees().contains(employee2));
         assertEquals(size-2,manager.getEmployees().size());
@@ -58,9 +63,12 @@ class ManagerTest {
     @Test
     public void testAddProduct(){
         int initialSize = manager.getListProducts().size();
+
         assertTrue(manager.getListProducts().isEmpty());
+
         manager.addProduct(product1);
         assertEquals(initialSize+1,manager.getListProducts().size());
+
         manager.addProduct(product2);
         assertEquals(initialSize+2,manager.getListProducts().size());
     }
@@ -69,10 +77,13 @@ class ManagerTest {
     public void testRemoveProduct(){
         manager.addProduct(product1);
         manager.addProduct(product2);
+
         int size = manager.getListProducts().size();
+
         manager.removeProduct(product1);
         assertFalse(manager.getListProducts().contains(product1));
         assertEquals(size-1,manager.getListProducts().size());
+
         manager.removeProduct(product2);
         assertFalse(manager.getListProducts().contains(product2));
         assertEquals(size-2,manager.getListProducts().size());
